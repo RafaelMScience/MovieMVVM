@@ -1,4 +1,4 @@
-package com.rafaelm.moviemvvm.single_movie_details
+package com.rafaelm.moviemvvm.ui.single_movie_details
 
 import androidx.lifecycle.LiveData
 import com.rafaelm.moviemvvm.data.api.TheMovieDBInterface
@@ -18,9 +18,9 @@ class MovieDetailsRepository(
     ): LiveData<MovieDetails> {
         movieDetailsNetworkDataSource =
             MovieDetailsNetworkDataSource(apiService, compositeDisposable)
-        movieDetailsNetworkDataSource.fetchMoviewDetails(movieId)
+        movieDetailsNetworkDataSource.fetchMovieDetails(movieId)
 
-        return movieDetailsNetworkDataSource.downloadedMovieDetailsReponse
+        return movieDetailsNetworkDataSource.downloadedMovieResponse
     }
 
     fun getMovieDetailsNetworkState(): LiveData<NetworkState> {

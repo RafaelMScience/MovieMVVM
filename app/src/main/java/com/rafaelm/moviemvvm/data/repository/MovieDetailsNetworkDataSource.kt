@@ -17,11 +17,11 @@ class MovieDetailsNetworkDataSource(
     val networkState: LiveData<NetworkState>
         get() = _networkState           //with this get, no need to implement get function to get networkState
 
-    private val _downloadedMovieDetailsReponse = MutableLiveData<MovieDetails>()
-    val downloadedMovieDetailsReponse: LiveData<MovieDetails>
-        get() = _downloadedMovieDetailsReponse
+    private val _downloadedMovieDetailsResponse = MutableLiveData<MovieDetails>()
+    val downloadedMovieResponse: LiveData<MovieDetails>
+        get() = _downloadedMovieDetailsResponse
 
-    fun fetchMoviewDetails(movieId: Int) {
+    fun fetchMovieDetails(movieId: Int) {
         _networkState.postValue(NetworkState.LOADING)
 
         try {
@@ -30,7 +30,7 @@ class MovieDetailsNetworkDataSource(
                     .subscribeOn(Schedulers.io())
                     .subscribe(
                         {
-                            _downloadedMovieDetailsReponse.postValue(it)
+                            _downloadedMovieDetailsResponse.postValue(it)
                             _networkState.postValue(NetworkState.LOADED)
                         },
                         {
@@ -40,7 +40,7 @@ class MovieDetailsNetworkDataSource(
                     )
             )
         } catch (e: Exception) {
-
+            Log.e("MovieDetailsDataSource",e.message)
         }
     }
 }
