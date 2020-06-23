@@ -29,7 +29,7 @@ class MovieDataSource(
             apiService.getPopularMovie(page)
                 .subscribeOn(Schedulers.io())
                 .subscribe({
-                    callback.onResult(it.movieList, null, page+1)
+                    callback.onResult(it.movieList, null, page + 1)
                     networkState.postValue(NetworkState.LOADED)
                 }, {
                     networkState.postValue(NetworkState.ERROR)
@@ -43,10 +43,10 @@ class MovieDataSource(
             apiService.getPopularMovie(params.key)
                 .subscribeOn(Schedulers.io())
                 .subscribe({
-                    if(it.totalPages >= params.key){
+                    if (it.totalPages >= params.key) {
                         callback.onResult(it.movieList, params.key)
                         networkState.postValue(NetworkState.LOADED)
-                    }else{
+                    } else {
                         networkState.postValue(NetworkState.ENDOFLIST)
 
                     }

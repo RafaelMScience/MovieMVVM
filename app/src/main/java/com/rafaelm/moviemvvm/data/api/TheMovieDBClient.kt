@@ -18,32 +18,28 @@ const val POST_PER_PAGE = 20
 object THeMovieDBClient {
     fun getClient(): TheMovieDBInterface {
 
-        //interceptor to send the API instead of sending to the url directly
         val requestInterceptor = Interceptor { chain ->
+            // Interceptor take only one argument which is a lambda function so parenthesis can be omitted
 
-            //builda to URL with the key
             val url = chain.request()
                 .url()
                 .newBuilder()
                 .addQueryParameter("api_key", API_KEY)
                 .build()
 
-            //prepare for shipping
             val request = chain.request()
                 .newBuilder()
                 .url(url)
                 .build()
 
-            return@Interceptor chain.proceed(request)
+            return@Interceptor chain.proceed(request)   //explicitly return a value from whit @ annotation. lambda always returns the value of the last expression implicitly
         }
 
-        //add the key within a maximum of 60 seconds
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(requestInterceptor)
             .connectTimeout(60, TimeUnit.SECONDS)
             .build()
 
-        //returns to the retrofit the key path and convert the gson
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BASE_URL)
@@ -51,5 +47,6 @@ object THeMovieDBClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(TheMovieDBInterface::class.java)
+
     }
 }

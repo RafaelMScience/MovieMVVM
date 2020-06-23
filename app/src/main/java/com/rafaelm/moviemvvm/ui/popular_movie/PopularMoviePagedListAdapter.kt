@@ -110,7 +110,7 @@ class PopularMoviePagedListAdapter(private val context: Context) :
         }
     }
 
-    fun setNetworkState(newNetworkState: NetworkState){
+    fun setNetworkState(newNetworkState: NetworkState) {
         val previousState = this.networkState
         val hadExtraRow = hasExtraRow()
         this.networkState = newNetworkState

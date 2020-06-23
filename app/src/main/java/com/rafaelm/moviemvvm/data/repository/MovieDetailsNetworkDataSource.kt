@@ -40,7 +40,7 @@ class MovieDetailsNetworkDataSource(
                     )
             )
         } catch (e: Exception) {
-            Log.e("MovieDetailsDataSource",e.message)
+            Log.e("MovieDetailsDataSource", e.message)
         }
     }
 }

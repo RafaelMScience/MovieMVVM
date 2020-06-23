@@ -17,12 +17,12 @@ class MainActivityViewModel(
         movieRepository.fetchLiveMoviePagedList(compositeDisposable)
     }
 
-    val networkState : LiveData<NetworkState> by lazy {
+    val networkState: LiveData<NetworkState> by lazy {
         movieRepository.getNetworkState()
     }
 
-    fun listIsEmpty() : Boolean{
-        return moviePagedList.value?.isEmpty()?:true
+    fun listIsEmpty(): Boolean {
+        return moviePagedList.value?.isEmpty() ?: true
     }
 
     override fun onCleared() {
